@@ -25,7 +25,11 @@ class GameScene: SKScene {
         addChild(spaceBackground)
         
         //2 init node
-        spaceShip = SKSpriteNode(imageNamed: "Spaceship-PNG-File")
+        spaceShip = SKSpriteNode(imageNamed: "spaceship-1")
+        spaceShip.xScale = 2.5
+        spaceShip.yScale = 2.5
+        spaceShip.physicsBody = SKPhysicsBody(texture: spaceShip.texture!, size: spaceShip.size)
+        spaceShip.physicsBody?.isDynamic = false
         addChild(spaceShip)
     }
     
@@ -42,9 +46,11 @@ class GameScene: SKScene {
     }
     
     func createAsteroid() -> SKSpriteNode {
-        let asteroid = SKSpriteNode(imageNamed: "meteor")
-        asteroid.position.x = CGFloat(GKARC4RandomSource.sharedRandom().nextInt(upperBound: Int(frame.size.height)))
-        asteroid.position.y = frame.size.height / 2
+        let asteroid = SKSpriteNode(imageNamed: "asteroid")
+        asteroid.position.x = CGFloat(GKARC4RandomSource.sharedRandom().nextInt(upperBound: 6))
+        asteroid.position.y = frame.size.height + asteroid.size.height
+        
+        asteroid.physicsBody = SKPhysicsBody(texture: asteroid.texture!, size: asteroid.size)
         
         return asteroid
     }
