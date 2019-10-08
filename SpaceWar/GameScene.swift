@@ -41,7 +41,7 @@ class GameScene: SKScene {
         let asteroidSequenceAction = SKAction.sequence([asteroidCreate, asteroidCreationDelay])
         let asteroidRunAction = SKAction.repeatForever(asteroidSequenceAction)
         
-        run(asteroidRunAction)  
+        run(asteroidRunAction)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -58,7 +58,13 @@ class GameScene: SKScene {
     
     func createAsteroid() -> SKSpriteNode {
         let asteroid = SKSpriteNode(imageNamed: "asteroid")
-        asteroid.position.x = CGFloat(GKARC4RandomSource.sharedRandom().nextInt(upperBound: 6))
+        
+        let ramdomScale = CGFloat(GKARC4RandomSource.sharedRandom().nextInt(upperBound: 4))
+        
+        asteroid.xScale = ramdomScale
+        asteroid.yScale = ramdomScale
+        
+        asteroid.position.x = CGFloat(GKARC4RandomSource.sharedRandom().nextInt(upperBound: 16))
         asteroid.position.y = frame.size.height + asteroid.size.height
         
         asteroid.physicsBody = SKPhysicsBody(texture: asteroid.texture!, size: asteroid.size)
