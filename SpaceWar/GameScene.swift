@@ -15,10 +15,11 @@ class GameScene: SKScene {
     var spaceShip: SKSpriteNode!
     
     override func didMove(to view: SKView) {
+        scene?.size = UIScreen.main.bounds.size
         
         //size
-        let width = UIScreen.main.bounds.width * 2
-        let height = UIScreen.main.bounds.height * 2
+        let width = UIScreen.main.bounds.width
+        let height = UIScreen.main.bounds.height
         
         let spaceBackground = SKSpriteNode(imageNamed: "spaceBackground")
         spaceBackground.size = CGSize(width: width, height: height)
@@ -26,8 +27,8 @@ class GameScene: SKScene {
         
         //2 init node
         spaceShip = SKSpriteNode(imageNamed: "spaceship-1")
-        spaceShip.xScale = 2.5
-        spaceShip.yScale = 2.5
+        spaceShip.xScale = 1.0
+        spaceShip.yScale = 1.0
         spaceShip.physicsBody = SKPhysicsBody(texture: spaceShip.texture!, size: spaceShip.size)
         spaceShip.physicsBody?.isDynamic = false
         addChild(spaceShip)
@@ -59,7 +60,7 @@ class GameScene: SKScene {
     func createAsteroid() -> SKSpriteNode {
         let asteroid = SKSpriteNode(imageNamed: "asteroid")
         
-        let ramdomScale = CGFloat(GKARC4RandomSource.sharedRandom().nextInt(upperBound: 4))
+        let ramdomScale = CGFloat(GKARC4RandomSource.sharedRandom().nextInt(upperBound: 6)) / 10
         
         asteroid.xScale = ramdomScale
         asteroid.yScale = ramdomScale
