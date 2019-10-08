@@ -16,6 +16,14 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         
+        //size
+        let width = UIScreen.main.bounds.width * 2
+        let height = UIScreen.main.bounds.height * 2
+        
+        let spaceBackground = SKSpriteNode(imageNamed: "spaceBackground")
+        spaceBackground.size = CGSize(width: width, height: height)
+        addChild(spaceBackground)
+        
         //2 init node
         spaceShip = SKSpriteNode(imageNamed: "Spaceship-PNG-File")
         addChild(spaceShip)
@@ -31,5 +39,19 @@ class GameScene: SKScene {
             let moveAction = SKAction.move(to: touchLocation, duration: 1)
             spaceShip.run(moveAction)
         }
+    }
+    
+    func createAsteroid() -> SKSpriteNode {
+        let asteroid = SKSpriteNode(imageNamed: "meteor")
+        asteroid.position.x = CGFloat(GKARC4RandomSource.sharedRandom().nextInt(upperBound: Int(frame.size.height)))
+        asteroid.position.y = frame.size.height / 2
+        
+        return asteroid
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        
+        let asteroid = createAsteroid()
+        addChild(asteroid)
     }
 }
