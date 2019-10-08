@@ -31,6 +31,17 @@ class GameScene: SKScene {
         spaceShip.physicsBody = SKPhysicsBody(texture: spaceShip.texture!, size: spaceShip.size)
         spaceShip.physicsBody?.isDynamic = false
         addChild(spaceShip)
+        
+        //generation asteroid
+        let asteroidCreate = SKAction.run { 
+            let asteroid = self.createAsteroid()
+            self.addChild(asteroid)
+        }
+        let asteroidCreationDelay = SKAction.wait(forDuration: 1.0, withRange: 0.5)
+        let asteroidSequenceAction = SKAction.sequence([asteroidCreate, asteroidCreationDelay])
+        let asteroidRunAction = SKAction.repeatForever(asteroidSequenceAction)
+        
+        run(asteroidRunAction)  
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -57,7 +68,7 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         
-        let asteroid = createAsteroid()
-        addChild(asteroid)
+//        let asteroid = createAsteroid()
+//        addChild(asteroid)
     }
 }
