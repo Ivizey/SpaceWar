@@ -18,6 +18,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var spaceShip: SKSpriteNode!
     var score = 0
     var scoreLabel: SKLabelNode!
+    var spaceBackground: SKSpriteNode!
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
@@ -28,8 +29,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let width = UIScreen.main.bounds.width
         let height = UIScreen.main.bounds.height
         
-        let spaceBackground = SKSpriteNode(imageNamed: "spaceBackground")
-        spaceBackground.size = CGSize(width: width, height: height)
+        spaceBackground = SKSpriteNode(imageNamed: "spaceBackground")
+        spaceBackground.size = CGSize(width: width + 50, height: height + 50)
+        
         addChild(spaceBackground)
         
         //2 init node
@@ -81,6 +83,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             print("distance: \(distance)")
             
             spaceShip.run(moveAction)
+            
+            let bgMoveAction = SKAction.move(to: CGPoint(x: -touchLocation.x / 100,
+                                                         y: -touchLocation.y / 100),
+                                             duration: time)
+            spaceBackground.run(bgMoveAction)
         }
     }
     
