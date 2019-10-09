@@ -16,6 +16,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //1 Создаем экземпляр node
     var spaceShip: SKSpriteNode!
+    var score = 0
+    var scoreLabel: SKLabelNode!
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
@@ -38,7 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         spaceShip.physicsBody?.isDynamic = false
         
         spaceShip.physicsBody?.categoryBitMask = spaceShipCategory
-        spaceShip.physicsBody?.collisionBitMask = asteroidCategory
+        spaceShip.physicsBody?.collisionBitMask = asteroidCategory | asteroidCategory
         spaceShip.physicsBody?.contactTestBitMask = asteroidCategory
         
         addChild(spaceShip)
@@ -47,6 +49,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let asteroidCreate = SKAction.run { 
             let asteroid = self.createAsteroid()
             self.addChild(asteroid)
+            asteroid.zPosition = 2
         }
         let asteroidPerSecond: Double = 1
         let asteroidCreationDelay = SKAction.wait(forDuration: 1.0 / asteroidPerSecond, withRange: 0.5)
@@ -54,6 +57,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let asteroidRunAction = SKAction.repeatForever(asteroidSequenceAction)
         
         run(asteroidRunAction)
+        
+        scoreLabel = SKLabelNode(text: "Score: \(score)")
+        scoreLabel.position = CGPoint(x: frame.size.width / scoreLabel.frame.size.width, y: 300)
+        addChild(scoreLabel)
+        
+        spaceBackground.zPosition = 0
+        spaceShip.zPosition = 1
+        scoreLabel.zPosition = 3
     }
     
     // C = sqrt((x2 - x1)^2 + (y2 - y1)^2)
@@ -114,12 +125,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let heightScreen =  UIScreen.main.bounds.height
             if asteroid.position.y < -heightScreen {
                 asteroid.removeFromParent()
+                
+                self.score = self.score + 1
+                self.scoreLabel.text = "Score: \(self.score)"
             }
         }
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        print("Contact!")
+        
+        if contact.bodyA.categoryBitMask == spaceShipCategory && contact.bodyB.categoryBitMask == asteroidCategory ||
+            contact.bodyB.categoryBitMask == spaceShipCategory && contact.bodyA.categoryBitMask == asteroidCategory {
+            self.score = 0
+            self.scoreLabel.text = "Score: \(self.score)"
+        }
     }
     
     func didEnd(_ contact: SKPhysicsContact) {
