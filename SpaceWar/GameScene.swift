@@ -114,6 +114,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if !gameIsPaused {
         if let touch = touches.first {
             //3 определяем точку прикосновения
             let touchLocation = touch.location(in: self)
@@ -130,6 +131,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                                          y: -touchLocation.y / 100),
                                              duration: time)
             spaceBackground.run(bgMoveAction)
+            }
         }
     }
     

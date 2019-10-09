@@ -15,6 +15,7 @@
 		04A252A3234C7F2F0084A17B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A252A1234C7F2F0084A17B /* Main.storyboard */; };
 		04A252A5234C7F2F0084A17B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04A252A4234C7F2F0084A17B /* Assets.xcassets */; };
 		04A252A8234C7F2F0084A17B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A252A6234C7F2F0084A17B /* LaunchScreen.storyboard */; };
+		04A252B2234E0FCD0084A17B /* Stars.sks in Resources */ = {isa = PBXBuildFile; fileRef = 04A252B1234E0FCD0084A17B /* Stars.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		04A252A4234C7F2F0084A17B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04A252A7234C7F2F0084A17B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04A252A9234C7F2F0084A17B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04A252B1234E0FCD0084A17B /* Stars.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Stars.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				04A25299234C7F2F0084A17B /* GameScene.sks */,
 				04A2529B234C7F2F0084A17B /* Actions.sks */,
 				04A2529D234C7F2F0084A17B /* GameScene.swift */,
+				04A252B1234E0FCD0084A17B /* Stars.sks */,
 				04A2529F234C7F2F0084A17B /* GameViewController.swift */,
 				04A252A1234C7F2F0084A17B /* Main.storyboard */,
 				04A252A4234C7F2F0084A17B /* Assets.xcassets */,
@@ -138,6 +141,7 @@
 				04A252A5234C7F2F0084A17B /* Assets.xcassets in Resources */,
 				04A252A8234C7F2F0084A17B /* LaunchScreen.storyboard in Resources */,
 				04A2529C234C7F2F0084A17B /* Actions.sks in Resources */,
+				04A252B2234E0FCD0084A17B /* Stars.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
