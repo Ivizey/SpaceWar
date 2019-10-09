@@ -19,6 +19,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var score = 0
     var scoreLabel: SKLabelNode!
     var spaceBackground: SKSpriteNode!
+    var asteroidLayer: SKNode!
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
@@ -45,12 +46,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         spaceShip.physicsBody?.collisionBitMask = asteroidCategory | asteroidCategory
         spaceShip.physicsBody?.contactTestBitMask = asteroidCategory
         
+        let colorAction1 = SKAction.colorize(with: .cyan, colorBlendFactor: 1, duration: 1)
+        let colorAction2 = SKAction.colorize(with: .white, colorBlendFactor: 0, duration: 1)
+        
+        let colorSequenceAnimation = SKAction.sequence([colorAction1, colorAction2])
+        let colorActionRepeat = SKAction.repeatForever(colorSequenceAnimation)
+        
+        spaceShip.run(colorActionRepeat)
+        
         addChild(spaceShip)
         
         //generation asteroid
+        asteroidLayer = SKNode()
+        asteroidLayer.zPosition = 2
+        addChild(asteroidLayer)
+        
         let asteroidCreate = SKAction.run { 
             let asteroid = self.createAsteroid()
-            self.addChild(asteroid)
+            self.asteroidLayer.addChild(asteroid)
             asteroid.zPosition = 2
         }
         let asteroidPerSecond: Double = 2
@@ -58,7 +71,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let asteroidSequenceAction = SKAction.sequence([asteroidCreate, asteroidCreationDelay])
         let asteroidRunAction = SKAction.repeatForever(asteroidSequenceAction)
         
-        run(asteroidRunAction)
+        self.asteroidLayer.run(asteroidRunAction)
         
         scoreLabel = SKLabelNode(text: "Score: \(score)")
         scoreLabel.position = CGPoint(x: frame.size.width / scoreLabel.frame.size.width, y: 300)
@@ -69,7 +82,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.zPosition = 3
     }
     
-    // C = sqrt((x2 - x1)^2 + (y2 - y1)^2)
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             //3 определяем точку прикосновения
@@ -87,6 +99,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                                          y: -touchLocation.y / 100),
                                              duration: time)
             spaceBackground.run(bgMoveAction)
+            
+            self.asteroidLayer.isPaused = !self.asteroidLayer.isPaused
+            physicsWorld.speed = 0
         }
     }
     
@@ -131,7 +146,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didSimulatePhysics() {
-        enumerateChildNodes(withName: "asteroid") { (asteroid, stop) in
+        asteroidLayer.enumerateChildNodes(withName: "asteroid") { (asteroid, stop) in
             let heightScreen =  UIScreen.main.bounds.height
             if asteroid.position.y < -heightScreen {
                 asteroid.removeFromParent()
