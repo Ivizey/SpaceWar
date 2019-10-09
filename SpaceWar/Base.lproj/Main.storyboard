@@ -25,6 +25,9 @@
                                 <rect key="frame" x="295" y="20" width="64" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="pause"/>
+                                <connections>
+                                    <action selector="pauseButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="bZj-7Z-rOF"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

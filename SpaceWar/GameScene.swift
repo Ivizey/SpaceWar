@@ -29,6 +29,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.speed = 0
     }
     
+    func pauseButton(sender: AnyObject) {
+        if !gameIsPaused {
+            pauseTheGame()
+        } else {
+            unPauseTheGame()
+        }
+    }
+    
     func unPauseTheGame() {
         gameIsPaused = false
         self.asteroidLayer.isPaused = false
@@ -106,7 +114,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !gameIsPaused {
         if let touch = touches.first {
             //3 определяем точку прикосновения
             let touchLocation = touch.location(in: self)
@@ -123,12 +130,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                                          y: -touchLocation.y / 100),
                                              duration: time)
             spaceBackground.run(bgMoveAction)
-            
-            self.asteroidLayer.isPaused = !self.asteroidLayer.isPaused
-            physicsWorld.speed = 0
-            
-            pauseTheGame()
-        }
         }
     }
     
