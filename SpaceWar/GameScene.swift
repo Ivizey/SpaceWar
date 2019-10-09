@@ -38,23 +38,38 @@ class GameScene: SKScene {
             let asteroid = self.createAsteroid()
             self.addChild(asteroid)
         }
-        let asteroidCreationDelay = SKAction.wait(forDuration: 1.0, withRange: 0.5)
+        let asteroidPerSecond: Double = 20
+        let asteroidCreationDelay = SKAction.wait(forDuration: 1.0 / asteroidPerSecond, withRange: 0.5)
         let asteroidSequenceAction = SKAction.sequence([asteroidCreate, asteroidCreationDelay])
         let asteroidRunAction = SKAction.repeatForever(asteroidSequenceAction)
         
         run(asteroidRunAction)
     }
     
+    // C = sqrt((x2 - x1)^2 + (y2 - y1)^2)
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             //3 определяем точку прикосновения
             let touchLocation = touch.location(in: self)
-            print(touchLocation)
             
-            //4 создаем действие
-            let moveAction = SKAction.move(to: touchLocation, duration: 1)
+            let distance = distanceCalc(a: spaceShip.position, b: touchLocation)
+            let speed: CGFloat = 500
+            let time = timeToIntervalDistance(distance: distance, speed: speed)
+            let moveAction = SKAction.move(to: touchLocation, duration: time)
+            print("time: \(time)")
+            print("distance: \(distance)")
+            
             spaceShip.run(moveAction)
         }
+    }
+    
+    func distanceCalc(a: CGPoint, b: CGPoint) -> CGFloat {
+        return sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y))
+    }
+    
+    func timeToIntervalDistance(distance: CGFloat, speed: CGFloat) -> TimeInterval {
+        let time = distance / speed
+        return TimeInterval(time)
     }
     
     func createAsteroid() -> SKSpriteNode {
