@@ -20,13 +20,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreLabel: SKLabelNode!
     var spaceBackground: SKSpriteNode!
     var asteroidLayer: SKNode!
-    
+    var starsLayer: SKNode!
     var gameIsPaused: Bool = false
     
     func pauseTheGame() {
         gameIsPaused = true
         self.asteroidLayer.isPaused = true
         physicsWorld.speed = 0
+        starsLayer.isPaused = true
     }
     
     func pauseButton(sender: AnyObject) {
@@ -41,6 +42,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameIsPaused = false
         self.asteroidLayer.isPaused = false
         physicsWorld.speed = 1
+        starsLayer.isPaused = false
     }
     
     func resetTheGame() {
@@ -65,6 +67,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         spaceBackground.size = CGSize(width: width + 50, height: height + 50)
         
         addChild(spaceBackground)
+        
+        //stars
+        let starPath = Bundle.main.path(forResource: "Stars", ofType: "sks")
+        let starsEmiter = NSKeyedUnarchiver.unarchiveObject(withFile: starPath!) as? SKEmitterNode
+        
+        starsEmiter?.zPosition = 1
+        starsEmiter?.position = CGPoint(x: frame.midX, y: frame.height / 2)
+        starsEmiter?.particlePositionRange.dx = frame.width
+        starsEmiter?.advanceSimulationTime(10)
+        
+        starsLayer = SKNode()
+        starsEmiter?.zPosition = 1
+        addChild(starsLayer)
+        
+        starsLayer.addChild(starsEmiter!)
         
         //2 init node
         spaceShip = SKSpriteNode(imageNamed: "spaceship-1")
