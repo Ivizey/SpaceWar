@@ -21,6 +21,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var spaceBackground: SKSpriteNode!
     var asteroidLayer: SKNode!
     
+    var gameIsPaused: Bool = false
+    
+    func pauseTheGame() {
+        gameIsPaused = true
+        self.asteroidLayer.isPaused = true
+        physicsWorld.speed = 0
+    }
+    
+    func unPauseTheGame() {
+        gameIsPaused = false
+        self.asteroidLayer.isPaused = false
+        physicsWorld.speed = 1
+    }
+    
+    func resetTheGame() {
+        score = 0
+        scoreLabel.text = "Score: \(score)"
+        
+        gameIsPaused = false
+        self.asteroidLayer.isPaused = false
+        physicsWorld.speed = 1
+    }
+    
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.8)
@@ -83,6 +106,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if !gameIsPaused {
         if let touch = touches.first {
             //3 определяем точку прикосновения
             let touchLocation = touch.location(in: self)
@@ -102,6 +126,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             self.asteroidLayer.isPaused = !self.asteroidLayer.isPaused
             physicsWorld.speed = 0
+            
+            pauseTheGame()
+        }
         }
     }
     
