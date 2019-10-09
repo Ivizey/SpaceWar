@@ -27,8 +27,8 @@ class GameScene: SKScene {
         
         //2 init node
         spaceShip = SKSpriteNode(imageNamed: "spaceship-1")
-        spaceShip.xScale = 1.0
-        spaceShip.yScale = 1.0
+        spaceShip.xScale = 0.5
+        spaceShip.yScale = 0.5
         spaceShip.physicsBody = SKPhysicsBody(texture: spaceShip.texture!, size: spaceShip.size)
         spaceShip.physicsBody?.isDynamic = false
         addChild(spaceShip)
@@ -38,7 +38,7 @@ class GameScene: SKScene {
             let asteroid = self.createAsteroid()
             self.addChild(asteroid)
         }
-        let asteroidPerSecond: Double = 20
+        let asteroidPerSecond: Double = 1
         let asteroidCreationDelay = SKAction.wait(forDuration: 1.0 / asteroidPerSecond, withRange: 0.5)
         let asteroidSequenceAction = SKAction.sequence([asteroidCreate, asteroidCreationDelay])
         let asteroidRunAction = SKAction.repeatForever(asteroidSequenceAction)
@@ -84,7 +84,7 @@ class GameScene: SKScene {
         asteroid.position.y = frame.size.height + asteroid.size.height
         
         asteroid.physicsBody = SKPhysicsBody(texture: asteroid.texture!, size: asteroid.size)
-        
+        asteroid.name = "asteroid"
         return asteroid
     }
     
@@ -93,4 +93,21 @@ class GameScene: SKScene {
 //        let asteroid = createAsteroid()
 //        addChild(asteroid)
     }
+    
+    override func didSimulatePhysics() {
+        enumerateChildNodes(withName: "asteroid") { (asteroid, stop) in
+            let heightScreen =  UIScreen.main.bounds.height
+            if asteroid.position.y < -heightScreen {
+                asteroid.removeFromParent()
+            }
+        }
+    }
 }
+
+
+
+
+
+
+
+
