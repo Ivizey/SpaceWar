@@ -13,9 +13,12 @@ import GameplayKit
 class GameViewController: UIViewController {
     
     var gameScene: GameScene!
+    var pauseViewController: UIViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        pauseViewController = storyboard?.instantiateViewController(withIdentifier: "PauseViewController")
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
@@ -52,8 +55,16 @@ class GameViewController: UIViewController {
         return true
     }
     
+    func showVC(_ viewController: UIViewController) {
+        addChildViewController(viewController)
+        view.addSubview(viewController.view)
+        viewController.view.frame = view.bounds
+    }
+    
     @IBAction func pauseButton(_ sender: UIButton) {
         gameScene.pauseButton(sender: sender)
+        showVC(pauseViewController)
+        //present(pauseViewController, animated: true, completion: nil)
     }
     
 }
