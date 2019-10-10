@@ -61,18 +61,30 @@ class GameViewController: UIViewController {
     func hidePauseScreen(viewController: PauseViewController) {
         viewController.willMove(toParentViewController: nil)
         viewController.removeFromParentViewController()
-        viewController.view.removeFromSuperview()
+        
+        viewController.view.alpha = 1
+        
+        UIView.animate(withDuration: 0.5, animations: { 
+            viewController.view.alpha = 0
+        }) { (completed) in
+            viewController.view.removeFromSuperview()
+        }
     }
     
-    func showVC(_ viewController: PauseViewController) {
+    func showPauseScreen(_ viewController: PauseViewController) {
         addChildViewController(viewController)
         view.addSubview(viewController.view)
         viewController.view.frame = view.bounds
+        
+        viewController.view.alpha = 0
+        UIView.animate(withDuration: 0.5) { 
+            viewController.view.alpha = 1
+        }
     }
     
     @IBAction func pauseButton(_ sender: UIButton) {
-        gameScene.pauseButton(sender: sender)
-        showVC(pauseViewController)
+        gameScene.pauseTheGame()
+        showPauseScreen(pauseViewController)
         //present(pauseViewController, animated: true, completion: nil)
     }
     
@@ -81,6 +93,7 @@ class GameViewController: UIViewController {
 extension GameViewController: PauseVCDelegate {
     func pauseViewControllerPlayButton(_ viewController: PauseViewController) {
         hidePauseScreen(viewController: pauseViewController)
+        gameScene.unPauseTheGame()
     }
 }
 

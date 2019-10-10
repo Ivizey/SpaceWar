@@ -8,13 +8,14 @@
 
 import SpriteKit
 import GameplayKit
+//import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let spaceShipCategory: UInt32 = 0x1 << 0 //00000.01
     let asteroidCategory: UInt32 = 0x1 << 1 //000..10
     
-    //1 Create node
+    //1 Create properties
     var spaceShip: SKSpriteNode!
     var score = 0
     var scoreLabel: SKLabelNode!
@@ -23,6 +24,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var starsLayer: SKNode!
     var gameIsPaused: Bool = false
     var spaceShipLayer: SKNode!
+//    var musicPlayer: AVAudioPlayer!
+    
+    var musicOn = true
+    var soundOn = true
+    
+//    func musicOnOrOff() {
+//        if musicOn {
+//            musicPlayer.play()
+//        } else {
+//            musicPlayer.stop()
+//        }
+//    }
     
     func pauseTheGame() {
         gameIsPaused = true
@@ -30,14 +43,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.speed = 0
         starsLayer.isPaused = true
         spaceShipLayer.isPaused = true
-    }
-    
-    func pauseButton(sender: AnyObject) {
-        if !gameIsPaused {
-            pauseTheGame()
-        } else {
-            unPauseTheGame()
-        }
+        
+//        musicOnOrOff()
     }
     
     func unPauseTheGame() {

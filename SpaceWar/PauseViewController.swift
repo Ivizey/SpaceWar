@@ -15,6 +15,9 @@ protocol PauseVCDelegate {
 
 class PauseViewController: UIViewController {
     
+    @IBOutlet weak var soundButton: UIButton!
+    @IBOutlet weak var musicButton: UIButton!
+    
     var delegate: PauseVCDelegate!
 
     override func viewDidLoad() {
