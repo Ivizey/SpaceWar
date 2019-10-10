@@ -14,7 +14,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let spaceShipCategory: UInt32 = 0x1 << 0 //00000.01
     let asteroidCategory: UInt32 = 0x1 << 1 //000..10
     
-    //1 Создаем экземпляр node
+    //1 Create node
     var spaceShip: SKSpriteNode!
     var score = 0
     var scoreLabel: SKLabelNode!
@@ -22,6 +22,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var asteroidLayer: SKNode!
     var starsLayer: SKNode!
     var gameIsPaused: Bool = false
+    var spaceShipLayer: SKNode!
     
     func pauseTheGame() {
         gameIsPaused = true
@@ -102,7 +103,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         spaceShip.run(colorActionRepeat)
         
-        addChild(spaceShip)
+        //addChild(spaceShip)
+        
+        //create layer for starShip & fire
+        spaceShipLayer = SKNode()
+        spaceShipLayer.addChild(spaceShip)
+        spaceShipLayer.zPosition = 3
+        spaceShip.zPosition = 1
+        spaceShipLayer.position = CGPoint(x: frame.midX, y: frame.height / 4)
+        addChild(spaceShipLayer)
+        
+        //create fire
+        let firePath = Bundle.main.path(forResource: "Fire", ofType: "sks")
+        let fireEmitter = NSKeyedUnarchiver.unarchiveObject(withFile: firePath!) as? SKEmitterNode
+        fireEmitter?.zPosition = 0
+        fireEmitter?.position.y = -30
+        fireEmitter?.targetNode = self
+        spaceShipLayer.addChild(fireEmitter!)
         
         //generation asteroid
         asteroidLayer = SKNode()
@@ -126,14 +143,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(scoreLabel)
         
         spaceBackground.zPosition = 0
-        spaceShip.zPosition = 1
+        //spaceShip.zPosition = 1
         scoreLabel.zPosition = 3
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !gameIsPaused {
         if let touch = touches.first {
-            //3 определяем точку прикосновения
+            //3 find touch
             let touchLocation = touch.location(in: self)
             
             let distance = distanceCalc(a: spaceShip.position, b: touchLocation)
@@ -142,7 +159,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let moveAction = SKAction.move(to: touchLocation, duration: time)
             moveAction.timingMode = SKActionTimingMode.easeInEaseOut
             
-            spaceShip.run(moveAction)
+            spaceShipLayer.run(moveAction)
             
             let bgMoveAction = SKAction.move(to: CGPoint(x: -touchLocation.x / 100,
                                                          y: -touchLocation.y / 100),
