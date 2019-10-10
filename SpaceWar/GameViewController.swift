@@ -13,12 +13,15 @@ import GameplayKit
 class GameViewController: UIViewController {
     
     var gameScene: GameScene!
-    var pauseViewController: UIViewController!
+    var pauseViewController: PauseViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        pauseViewController = storyboard?.instantiateViewController(withIdentifier: "PauseViewController")
+        pauseViewController = (storyboard?.instantiateViewController(withIdentifier: "PauseViewController"))
+            as! PauseViewController
+        
+        pauseViewController.delegate = self
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
@@ -55,7 +58,13 @@ class GameViewController: UIViewController {
         return true
     }
     
-    func showVC(_ viewController: UIViewController) {
+    func hidePauseScreen(viewController: PauseViewController) {
+        viewController.willMove(toParentViewController: nil)
+        viewController.removeFromParentViewController()
+        viewController.view.removeFromSuperview()
+    }
+    
+    func showVC(_ viewController: PauseViewController) {
         addChildViewController(viewController)
         view.addSubview(viewController.view)
         viewController.view.frame = view.bounds
@@ -68,3 +77,13 @@ class GameViewController: UIViewController {
     }
     
 }
+
+extension GameViewController: PauseVCDelegate {
+    func pauseViewControllerPlayButton(_ viewController: PauseViewController) {
+        hidePauseScreen(viewController: pauseViewController)
+    }
+}
+
+
+
+
