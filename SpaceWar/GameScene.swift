@@ -8,7 +8,7 @@
 
 import SpriteKit
 import GameplayKit
-//import AVFoundation
+import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -24,7 +24,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var starsLayer: SKNode!
     var gameIsPaused: Bool = false
     var spaceShipLayer: SKNode!
-//    var musicPlayer: AVAudioPlayer!
+    var musicPlayer: AVAudioPlayer!
     
     var musicOn = true
     var soundOn = true
@@ -44,6 +44,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         starsLayer.isPaused = true
         spaceShipLayer.isPaused = true
         
+        musicPlayer.pause()
 //        musicOnOrOff()
     }
     
@@ -53,6 +54,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.speed = 1
         starsLayer.isPaused = false
         spaceShipLayer.isPaused = false
+        
+        musicPlayer.play()
     }
     
     func resetTheGame() {
@@ -154,6 +157,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         spaceBackground.zPosition = 0
         //spaceShip.zPosition = 1
         scoreLabel.zPosition = 3
+        
+        playMusic()
+    }
+    
+    func playMusic() {
+        if  let musicPath = Bundle.main.url(forResource: "music", withExtension: "mp3") {
+            musicPlayer = try! AVAudioPlayer(contentsOf: musicPath, fileTypeHint: nil)
+            musicPlayer.play()
+        }
+        
+        musicPlayer.numberOfLoops = -1
+        musicPlayer.volume = 0.2
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -237,10 +252,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.score = 0
             self.scoreLabel.text = "Score: \(self.score)"
         }
-    }
-    
-    func didEnd(_ contact: SKPhysicsContact) {
         
+        //let hitSoundAction = SKAction.playSoundFileNamed("crash", waitForCompletion: true)
+        //run(hitSoundAction)
     }
 }
 

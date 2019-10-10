@@ -18,6 +18,8 @@
 		04A252B2234E0FCD0084A17B /* Stars.sks in Resources */ = {isa = PBXBuildFile; fileRef = 04A252B1234E0FCD0084A17B /* Stars.sks */; };
 		04A252B4234F13230084A17B /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 04A252B3234F13230084A17B /* Fire.sks */; };
 		04A252B6234F1CF50084A17B /* PauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A252B5234F1CF50084A17B /* PauseViewController.swift */; };
+		04A252B8234F3FF20084A17B /* crash.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04A252B7234F3FF20084A17B /* crash.mp3 */; };
+		04A252BA234F44030084A17B /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 04A252B9234F44030084A17B /* music.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		04A252B1234E0FCD0084A17B /* Stars.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Stars.sks; path = SpaceWar/Stars.sks; sourceTree = "<group>"; };
 		04A252B3234F13230084A17B /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Fire.sks; path = SpaceWar/Fire.sks; sourceTree = "<group>"; };
 		04A252B5234F1CF50084A17B /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseViewController.swift; sourceTree = "<group>"; };
+		04A252B7234F3FF20084A17B /* crash.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = crash.mp3; sourceTree = "<group>"; };
+		04A252B9234F44030084A17B /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,8 @@
 				04A252A4234C7F2F0084A17B /* Assets.xcassets */,
 				04A252A6234C7F2F0084A17B /* LaunchScreen.storyboard */,
 				04A252A9234C7F2F0084A17B /* Info.plist */,
+				04A252B7234F3FF20084A17B /* crash.mp3 */,
+				04A252B9234F44030084A17B /* music.mp3 */,
 			);
 			path = SpaceWar;
 			sourceTree = "<group>";
@@ -142,7 +148,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04A252B8234F3FF20084A17B /* crash.mp3 in Resources */,
 				04A252B4234F13230084A17B /* Fire.sks in Resources */,
+				04A252BA234F44030084A17B /* music.mp3 in Resources */,
 				04A252A3234C7F2F0084A17B /* Main.storyboard in Resources */,
 				04A2529A234C7F2F0084A17B /* GameScene.sks in Resources */,
 				04A252A5234C7F2F0084A17B /* Assets.xcassets in Resources */,
