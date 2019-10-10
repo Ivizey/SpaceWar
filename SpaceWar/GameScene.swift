@@ -29,13 +29,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var musicOn = true
     var soundOn = true
     
-//    func musicOnOrOff() {
-//        if musicOn {
-//            musicPlayer.play()
-//        } else {
-//            musicPlayer.stop()
-//        }
-//    }
+    func musicOnOrOff() {
+        if musicOn {
+            musicPlayer.play()
+        } else {
+            musicPlayer.stop()
+        }
+    }
     
     func pauseTheGame() {
         gameIsPaused = true
@@ -44,8 +44,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         starsLayer.isPaused = true
         spaceShipLayer.isPaused = true
         
-        musicPlayer.pause()
-//        musicOnOrOff()
+        musicOnOrOff()
     }
     
     func unPauseTheGame() {
@@ -164,7 +163,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func playMusic() {
         if  let musicPath = Bundle.main.url(forResource: "music", withExtension: "mp3") {
             musicPlayer = try! AVAudioPlayer(contentsOf: musicPath, fileTypeHint: nil)
-            musicPlayer.play()
+            musicOnOrOff()
         }
         
         musicPlayer.numberOfLoops = -1

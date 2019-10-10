@@ -90,17 +90,23 @@
                                 <rect key="frame" x="195" y="307" width="61" height="53"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <state key="normal" title="OFF">
+                                <state key="normal" title="ON">
                                     <color key="titleColor" red="1" green="0.18051593860000001" blue="0.51897055719999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="soundButtonPress:" destination="yuP-QK-kib" eventType="touchUpInside" id="vkG-uk-Mz9"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Xw-3C-e3w">
                                 <rect key="frame" x="195" y="359" width="61" height="53"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <state key="normal" title="OFF">
+                                <state key="normal" title="ON">
                                     <color key="titleColor" red="1" green="0.18051593860000001" blue="0.51897055719999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="musicButtonPress:" destination="yuP-QK-kib" eventType="touchUpInside" id="n2F-5T-BfI"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sound:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j79-gi-hfE">
                                 <rect key="frame" x="113" y="323" width="86" height="21"/>
