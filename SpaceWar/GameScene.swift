@@ -29,6 +29,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.asteroidLayer.isPaused = true
         physicsWorld.speed = 0
         starsLayer.isPaused = true
+        spaceShipLayer.isPaused = true
     }
     
     func pauseButton(sender: AnyObject) {
@@ -44,6 +45,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.asteroidLayer.isPaused = false
         physicsWorld.speed = 1
         starsLayer.isPaused = false
+        spaceShipLayer.isPaused = false
     }
     
     func resetTheGame() {
