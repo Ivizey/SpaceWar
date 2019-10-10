@@ -14,12 +14,13 @@ class GameViewController: UIViewController {
     
     var gameScene: GameScene!
     var pauseViewController: PauseViewController!
+    var gameOverViewController: GameOverViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        pauseViewController = (storyboard?.instantiateViewController(withIdentifier: "PauseViewController"))
-            as! PauseViewController
+        pauseViewController = storyboard?.instantiateViewController(withIdentifier: "PauseViewController") as! PauseViewController
+        gameOverViewController = storyboard?.instantiateViewController(withIdentifier: "gameOverViewController") as! GameOverViewController
         
         pauseViewController.delegate = self
         
@@ -58,7 +59,7 @@ class GameViewController: UIViewController {
         return true
     }
     
-    func hidePauseScreen(viewController: PauseViewController) {
+    func hidePauseScreen(viewController: UIViewController) {
         viewController.willMove(toParentViewController: nil)
         viewController.removeFromParentViewController()
         
@@ -71,7 +72,7 @@ class GameViewController: UIViewController {
         }
     }
     
-    func showPauseScreen(_ viewController: PauseViewController) {
+    func showPauseScreen(_ viewController: UIViewController) {
         addChildViewController(viewController)
         view.addSubview(viewController.view)
         viewController.view.frame = view.bounds
@@ -84,7 +85,8 @@ class GameViewController: UIViewController {
     
     @IBAction func pauseButton(_ sender: UIButton) {
         gameScene.pauseTheGame()
-        showPauseScreen(pauseViewController)
+        showPauseScreen(gameOverViewController)
+//        showPauseScreen(pauseViewController)
         //present(pauseViewController, animated: true, completion: nil)
     }
     

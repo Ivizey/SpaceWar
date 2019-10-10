@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04677694234F6B2000697762 /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04677693234F6B2000697762 /* GameOverViewController.swift */; };
 		04A25298234C7F2F0084A17B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A25297234C7F2F0084A17B /* AppDelegate.swift */; };
 		04A2529A234C7F2F0084A17B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 04A25299234C7F2F0084A17B /* GameScene.sks */; };
 		04A2529C234C7F2F0084A17B /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 04A2529B234C7F2F0084A17B /* Actions.sks */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04677693234F6B2000697762 /* GameOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
 		04A25294234C7F2F0084A17B /* SpaceWar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceWar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04A25297234C7F2F0084A17B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04A25299234C7F2F0084A17B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				04A2529D234C7F2F0084A17B /* GameScene.swift */,
 				04A2529F234C7F2F0084A17B /* GameViewController.swift */,
 				04A252B5234F1CF50084A17B /* PauseViewController.swift */,
+				04677693234F6B2000697762 /* GameOverViewController.swift */,
 				04A252A1234C7F2F0084A17B /* Main.storyboard */,
 				04A252A4234C7F2F0084A17B /* Assets.xcassets */,
 				04A252A6234C7F2F0084A17B /* LaunchScreen.storyboard */,
@@ -171,6 +174,7 @@
 				04A252B6234F1CF50084A17B /* PauseViewController.swift in Sources */,
 				04A252A0234C7F2F0084A17B /* GameViewController.swift in Sources */,
 				04A25298234C7F2F0084A17B /* AppDelegate.swift in Sources */,
+				04677694234F6B2000697762 /* GameOverViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +340,7 @@
 				04A252AE234C7F2F0084A17B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
