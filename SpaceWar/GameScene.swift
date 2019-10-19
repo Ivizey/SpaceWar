@@ -25,6 +25,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameIsPaused: Bool = false
     var spaceShipLayer: SKNode!
     var musicPlayer: AVAudioPlayer!
+    var leavesLayer: SKNode!
     
     var musicOn = true
     var soundOn = true
@@ -67,6 +68,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didMove(to view: SKView) {
+        
+        self.score = 0
+        
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.8)
         scene?.size = UIScreen.main.bounds.size
@@ -142,13 +146,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.asteroidLayer.addChild(asteroid)
             asteroid.zPosition = 2
         }
-        let asteroidPerSecond: Double = 2
+        let asteroidPerSecond: Double = 1
         let asteroidCreationDelay = SKAction.wait(forDuration: 1.0 / asteroidPerSecond, withRange: 0.5)
         let asteroidSequenceAction = SKAction.sequence([asteroidCreate, asteroidCreationDelay])
         let asteroidRunAction = SKAction.repeatForever(asteroidSequenceAction)
         
         self.asteroidLayer.run(asteroidRunAction)
         
+        //create hearts node
+        leavesLayer = SKSpriteNode(imageNamed: "8bitheart")
+        leavesLayer.xScale = 0.5
+        leavesLayer.yScale = 0.5
+        addChild(leavesLayer)
+        
+        //create score node
         scoreLabel = SKLabelNode(text: "Score: \(score)")
         scoreLabel.position = CGPoint(x: frame.size.width / scoreLabel.frame.size.width, y: 300)
         addChild(scoreLabel)
@@ -238,8 +249,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if asteroid.position.y < -heightScreen {
                 asteroid.removeFromParent()
                 
-                self.score = self.score + 1
-                self.scoreLabel.text = "Score: \(self.score)"
+                //self.score = self.score + 1
+                //self.scoreLabel.text = "Score: \(self.score)"
             }
         }
     }
@@ -248,8 +259,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if contact.bodyA.categoryBitMask == spaceShipCategory && contact.bodyB.categoryBitMask == asteroidCategory ||
             contact.bodyB.categoryBitMask == spaceShipCategory && contact.bodyA.categoryBitMask == asteroidCategory {
-            self.score = 0
+            self.score += 1
             self.scoreLabel.text = "Score: \(self.score)"
+            if score > 3 {
+                pauseTheGame()
+            }
         }
         
         //let hitSoundAction = SKAction.playSoundFileNamed("crash", waitForCompletion: true)
